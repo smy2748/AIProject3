@@ -22,10 +22,18 @@ public class Parser {
         File file = new File("3group.csv");
         FileWriter fw = new FileWriter(file);
         ArrayList<Note> notes;
+        ArrayList<DataPoint<NoteGroup>> ngs = new ArrayList<DataPoint<NoteGroup>>();
         for(Chorale c : chorales){
             notes = c.getNotes();
             String out = c.number + ",";
             for(int i=0; i< notes.size()-3; i+=3){
+                NoteGroup noteGrp = new NoteGroup();
+                noteGrp.addNote(notes.get(i));
+                noteGrp.addNote(notes.get(i+1));
+                noteGrp.addNote(notes.get(i+2));
+                noteGrp.setLabel("C"+c.number +"NG"+(i/3));
+                DataPoint<NoteGroup> dp = new DataPoint<NoteGroup>(noteGrp);
+                ngs.add(dp);
                 out += notes.get(i).toCsv() +","+notes.get(i+1).toCsv() +","+notes.get(i+2).toCsv()+"\n";
                 fw.write(out);
                 out = c.number +",";
@@ -34,6 +42,14 @@ public class Parser {
         }
         fw.close();
 
+        DBSCAN dbs = new DBSCAN();
+        ArrayList<Cluster<NoteGroup>> custers =DBSCAN.DBSCAN(ngs,.5,10);
+
+        System.out.println(custers.size());
+
+        for(Cluster<NoteGroup> c : custers){
+            System.out.println(c);
+        }
     }
 
     public static Chorale parseChorale(Scanner sc){

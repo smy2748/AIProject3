@@ -66,8 +66,14 @@ public class DataPoint<T extends DistCalc> {
             return pointDistance.get(dp);
         }
 
-        Double d = distanceTo(dp);
+        Double d = data.calculateDistance(dp.getData());
+        dp.setDist(this,d);
         pointDistance.put(dp,d);
         return d;
+    }
+
+    @Override
+    public String toString(){
+        return data.toString();
     }
 }

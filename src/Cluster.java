@@ -6,10 +6,13 @@ import java.util.ArrayList;
 public class Cluster<T extends DistCalc> {
 
     protected ArrayList<DataPoint<T>> in;
-
+    protected int clusterNumber;
+    protected static int counter =0;
 
     public Cluster(){
         in = new ArrayList<DataPoint<T>>();
+        clusterNumber = counter;
+        counter ++;
     }
 
     public void addToCluster(DataPoint<T> p){
@@ -23,5 +26,21 @@ public class Cluster<T extends DistCalc> {
 
     public void setIn(ArrayList<DataPoint<T>> in) {
         this.in = in;
+    }
+
+    @Override
+    public String toString(){
+        String str = "Cluster: " + clusterNumber + inCluster();
+
+        return str;
+    }
+
+    public String inCluster(){
+        String s = "";
+        s +="\n NoteGroups: \n\n";
+        for(DataPoint<T> dp : in){
+            s += dp + "\n";
+        }
+        return s;
     }
 }

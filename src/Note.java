@@ -18,4 +18,11 @@ public class Note {
     public String toCsv(){
         return startTime +"," + pitch + "," + duration +"," + key +","+ time + "," +fermata;
     }
+
+    @Override
+    public String toString(){
+        String s ="";
+        s+= "{Start Time: " + startTime + ", Pitch: " + pitch +", Duration: " + duration + ", Key: " + key + ", Time: " + time + ", Fermata: " + fermata +"}";
+        return s;
+    }
 }

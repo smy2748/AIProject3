@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class DBSCAN {
 
-    public static void DBSCAN(ArrayList<DataPoint<NoteGroup>> dataset, double eps, int minpts){
+    public static ArrayList<Cluster<NoteGroup>> DBSCAN(ArrayList<DataPoint<NoteGroup>> dataset, double eps, int minpts){
         ArrayList<Cluster<NoteGroup>> clusters = new ArrayList<Cluster<NoteGroup>>();
 
         ArrayList<DataPoint<NoteGroup>> neighbors;
@@ -23,6 +23,8 @@ public class DBSCAN {
                 }
             }
         }
+
+        return clusters;
     }
 
     public static void
@@ -32,7 +34,7 @@ public class DBSCAN {
                                 double eps,
                                 int minPts,
                                 ArrayList<DataPoint<NoteGroup>> dataset){
-        //add p to C
+        cluster.addToCluster(p);
         for(int i=0; i<neigh.size(); i++){
             DataPoint<NoteGroup> pprime = neigh.get(i);
             if(!pprime.isVisited()){

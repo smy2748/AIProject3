@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class NoteGroup extends DistCalc {
 
     protected ArrayList<Note> notes;
+    protected String label;
 
     public NoteGroup(){
         notes = new ArrayList<Note>();
@@ -21,6 +22,14 @@ public class NoteGroup extends DistCalc {
 
     public void addNote(Note n){
         notes.add(n);
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public int getKey(){
@@ -66,5 +75,16 @@ public class NoteGroup extends DistCalc {
         }
 
         return null;
+    }
+
+    @Override
+    public String toString(){
+        String str ="";
+        str += "Note Group: " + label;
+        str += "\nNotes in Group:\n";
+        for(Note n : notes){
+            str += "\t\t" + n +"\n";
+        }
+        return str;
     }
 }
