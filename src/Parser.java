@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -28,6 +29,7 @@ public class Parser {
                 out += notes.get(i).toCsv() +","+notes.get(i+1).toCsv() +","+notes.get(i+2).toCsv()+"\n";
                 fw.write(out);
                 out = c.number +",";
+
             }
         }
         fw.close();
@@ -40,7 +42,7 @@ public class Parser {
             line = sc.nextLine();
         }
         Chorale c = new Chorale();
-        System.out.println(line);
+       // System.out.println(line);
         String num = line.substring(1,line.indexOf('(',1)).trim();
         c.number = Integer.parseInt(num);
 
