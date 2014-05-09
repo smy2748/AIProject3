@@ -59,8 +59,17 @@ public class NoteGroup extends DistCalc {
         return PitchBox.boxPitch(avg);
     }
 
+    public String toCsv(){
+        StringBuilder res = new StringBuilder();
+        for(Note n : notes){
+            res.append(n.toCsv() +",");
+        }
+
+        return res.toString();
+    }
+
     @Override
-    public Double calculateDistance(DistCalc dc) {
+    public Double calculateDistance(DistCalc dc, WeightParams wp) {
 
         if(dc instanceof NoteGroup){
             NoteGroup other = (NoteGroup) dc;
@@ -69,11 +78,17 @@ public class NoteGroup extends DistCalc {
             dKey = getKey() - other.getKey();
             dTime = getTime() - other.getTime();
             dPitchBox = getPitchBox() - other.getPitchBox();
-
+            dPitchBox *= .5;
             double under = Math.pow(dKey,2) + Math.pow(dTime,2) + Math.pow(dPitchBox,2);
             return Math.sqrt(under);
         }
 
+        return null;
+    }
+
+    @Override
+    DistCalc copy() {
+        //TODO: Left as an exercise to the implementer
         return null;
     }
 

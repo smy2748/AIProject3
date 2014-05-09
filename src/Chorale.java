@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Chorale {
     protected ArrayList<Note> notes;
     public int number;
+    public String artist;
 
     public Chorale(){
         notes = new ArrayList<Note>();

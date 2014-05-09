@@ -22,7 +22,7 @@ public class Parser {
         File file = new File("3group.csv");
         FileWriter fw = new FileWriter(file);
         ArrayList<Note> notes;
-        ArrayList<DataPoint<NoteGroup>> ngs = new ArrayList<DataPoint<NoteGroup>>();
+        ArrayList<DataPoint> ngs = new ArrayList<DataPoint>();
         for(Chorale c : chorales){
             notes = c.getNotes();
             String out = c.number + ",";
@@ -43,7 +43,7 @@ public class Parser {
         fw.close();
 
         DBSCAN dbs = new DBSCAN();
-        ArrayList<Cluster<NoteGroup>> custers =DBSCAN.DBSCAN(ngs,.5,10);
+        ArrayList<Cluster> custers =DBSCAN.DBSCAN(ngs,.5,10, new WeightParams());
 
         System.out.println(custers.size());
 

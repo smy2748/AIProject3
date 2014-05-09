@@ -60,13 +60,13 @@ public class DataPoint<T extends DistCalc> {
         }
     }
 
-    public Double distanceTo(DataPoint<T> dp){
+    public Double distanceTo(DataPoint<T> dp, WeightParams wp){
 
         if(pointDistance.containsKey(dp)){
             return pointDistance.get(dp);
         }
 
-        Double d = data.calculateDistance(dp.getData());
+        Double d = data.calculateDistance(dp.getData(),wp);
         dp.setDist(this,d);
         pointDistance.put(dp,d);
         return d;
@@ -75,5 +75,11 @@ public class DataPoint<T extends DistCalc> {
     @Override
     public String toString(){
         return data.toString();
+    }
+
+    public DataPoint copyData(){
+        DataPoint res = new DataPoint(data.copy());
+
+        return res;
     }
 }

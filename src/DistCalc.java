@@ -3,5 +3,6 @@
  */
 public abstract class DistCalc {
 
-    abstract Double calculateDistance(DistCalc dc);
+    abstract Double calculateDistance(DistCalc dc,WeightParams wp);
+    abstract DistCalc copy();
 }
